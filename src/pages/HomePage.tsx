@@ -74,9 +74,10 @@ export default function HomePage() {
                   style={{ aspectRatio: '3/4' }}
                 >
                   <img
-                    src="/images/Outfit_Change_2.png"
+                    src="/images/Davida_Website_Photo_1.jpg"
                     alt="Davida — Tax Advisor at Eyneya Business Solutions"
                     className="w-full h-full object-cover object-top"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/15 via-transparent to-transparent" />
                 </div>
@@ -201,6 +202,7 @@ export default function HomePage() {
           alt=""
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover object-center"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-black/65" aria-hidden="true" />
         <div className="container-wide relative z-10">
@@ -263,6 +265,7 @@ export default function HomePage() {
                 alt="Tax advisory consultation session"
                 className="w-full object-cover object-top"
                 style={{ maxHeight: '320px' }}
+                loading="lazy"
               />
             </div>
             <div className="card card-pad bg-white flex-1">
