@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply font-sans text-brand-slate bg-white antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-brand-dark;
+  }
+  ::selection {
+    @apply bg-brand-purple-light text-brand-purple-dark;
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  .section-pad {
+    @apply py-20;
+  }
+  .hero-pad {
+    @apply py-28;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-gold {
+    @apply btn bg-brand-gold text-brand-dark hover:bg-brand-gold-dark px-6 py-3 focus:ring-brand-gold shadow-sm hover:shadow-md;
+  }
+  .btn-purple {
+    @apply btn bg-brand-purple text-white hover:bg-brand-purple-dark px-6 py-3 focus:ring-brand-purple shadow-sm hover:shadow-md;
+  }
+  .btn-outline {
+    @apply btn bg-white border border-brand-purple text-brand-purple hover:bg-brand-purple-light px-6 py-3 focus:ring-brand-purple;
+  }
+  .btn-ghost {
+    @apply btn text-brand-slate hover:text-brand-purple hover:bg-brand-purple-light px-4 py-2;
+  }
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+  .card {
+    @apply rounded-xl bg-white border border-gray-100 shadow-card;
+  }
+  .card-pad {
+    @apply p-6 sm:p-8;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-purple;
+  }
+  .link-quiet {
+    @apply text-brand-slate hover:text-brand-purple transition-colors;
+  }
+  .input {
+    @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-brand-dark placeholder-gray-400 focus:border-brand-purple focus:ring-1 focus:ring-brand-purple focus:outline-none transition-colors;
+  }
+  .label {
+    @apply block text-sm font-semibold text-brand-dark mb-1.5;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .badge-purple {
+    @apply badge bg-brand-purple-light text-brand-purple;
+  }
+  .badge-gold {
+    @apply badge bg-brand-gold-light text-brand-warning;
+  }
+  .badge-success {
+    @apply badge bg-emerald-50 text-brand-success;
+  }
+  .badge-error {
+    @apply badge bg-red-50 text-brand-error;
+  }
+  .badge-slate {
+    @apply badge bg-gray-100 text-brand-slate;
+  }
+}
+
+@layer utilities {
+  .shimmer-bg {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%);
+    background-size: 1000px 100%;
+    @apply animate-shimmer;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
