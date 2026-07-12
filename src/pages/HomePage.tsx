@@ -76,7 +76,7 @@ export default function HomePage() {
                   <img
                     src="/images/Davida_Website_Photo_1.jpg"
                     alt="Davida — Tax Advisor at Eyneya Business Solutions"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-center"
                     fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/15 via-transparent to-transparent" />
