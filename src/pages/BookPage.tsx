@@ -54,6 +54,7 @@ export default function BookPage() {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [step, setStep] = useState(1);
+  const [subStep, setSubStep] = useState(1);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedTier, setSelectedTier] = useState<ServiceTier | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -96,11 +97,18 @@ export default function BookPage() {
   const onPickService = (service: Service) => {
     setSelectedService(service);
     setSelectedTier(null);
+    setSubStep(2);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const onPickTier = (tier: ServiceTier) => {
     setSelectedTier(tier);
     setStep(2);
+  };
+
+  const backToServices = () => {
+    setSubStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const canAdvanceFromStep2 = !!selectedDate && !!selectedSlot;
@@ -244,7 +252,7 @@ export default function BookPage() {
 
       <Section bg="white" className="!pt-10">
         {/* Step 1: Choose Service */}
-        {step === 1 && (
+        {step === 1 && subStep === 1 && (
           <div className="animate-fade-in">
             <h2 className="text-2xl font-bold mb-2">Choose a Service</h2>
             <p className="text-brand-slate mb-8">Select a service to see pricing options.</p>
@@ -264,37 +272,41 @@ export default function BookPage() {
                 </button>
               ))}
             </div>
+          </div>
+        )}
 
-            {selectedService && selectedService.service_tiers && selectedService.service_tiers.length > 0 && (
-              <div className="mt-10 animate-fade-up">
-                <h3 className="text-xl font-bold mb-4">Choose a Pricing Option for {selectedService.name}</h3>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {selectedService.service_tiers.map((tier) => (
-                    <button
-                      key={tier.id}
-                      onClick={() => onPickTier(tier)}
-                      className={cn(
-                        'card card-pad text-left transition-all hover:shadow-card-hover',
-                        selectedTier?.id === tier.id && 'ring-2 ring-brand-purple shadow-card-hover',
-                      )}
-                    >
-                      <h4 className="font-bold text-brand-dark">{tier.name}</h4>
-                      <p className="mt-2 text-xl font-bold text-brand-purple font-serif">{tier.price_display}</p>
-                      <p className="mt-2 text-sm text-brand-slate leading-relaxed">{tier.best_for}</p>
-                      {tier.is_recurring && <span className="badge-gold mt-3 inline-flex">Recurring plan</span>}
-                    </button>
-                  ))}
-                </div>
-                <div className="mt-6 flex justify-end">
+        {/* Step 1, Sub-step 2: Choose Pricing Tier */}
+        {step === 1 && subStep === 2 && selectedService && (
+          <div className="animate-fade-in">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-2xl font-bold">Choose a Pricing Option</h2>
+                <p className="text-brand-slate mt-1">
+                  {selectedService.name} · {selectedService.duration_minutes} min session
+                </p>
+              </div>
+              <button onClick={backToServices} className="btn-ghost btn-sm">
+                <ChevronLeft className="h-4 w-4" />
+                Back
+              </button>
+            </div>
+            {selectedService.service_tiers && selectedService.service_tiers.length > 0 && (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {selectedService.service_tiers.map((tier) => (
                   <button
-                    onClick={() => setStep(2)}
-                    disabled={!selectedTier}
-                    className="btn-purple"
+                    key={tier.id}
+                    onClick={() => onPickTier(tier)}
+                    className={cn(
+                      'card card-pad text-left transition-all hover:shadow-card-hover',
+                      selectedTier?.id === tier.id && 'ring-2 ring-brand-purple shadow-card-hover',
+                    )}
                   >
-                    Continue
-                    <ChevronRight className="h-4 w-4" />
+                    <h4 className="font-bold text-brand-dark">{tier.name}</h4>
+                    <p className="mt-2 text-xl font-bold text-brand-purple font-serif">{tier.price_display}</p>
+                    <p className="mt-2 text-sm text-brand-slate leading-relaxed">{tier.best_for}</p>
+                    {tier.is_recurring && <span className="badge-gold mt-3 inline-flex">Recurring plan</span>}
                   </button>
-                </div>
+                ))}
               </div>
             )}
           </div>
