@@ -74,7 +74,7 @@ export default function HomePage() {
                   style={{ aspectRatio: '3/4' }}
                 >
                   <img
-                    src="/images/Outfit_Change_2 copy copy.png"
+                    src="/images/Outfit_Change_2.png"
                     alt="Davida — Tax Advisor at Eyneya Business Solutions"
                     className="w-full h-full object-cover object-center"
                     fetchPriority="high"
